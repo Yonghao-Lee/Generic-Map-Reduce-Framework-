@@ -1,9 +1,21 @@
-MapReduce Framework
+# MapReduce Framework
+
 A C++11 implementation of a generic Map-Reduce framework for concurrent processing across multiple threads, producing output pairs in shuffled, sorted order.
-Contents
-FilePurposeMapReduceFramework.hPublic APIMapReduceFramework.cppFramework implementationMapReduceClient.hClient interface (map/reduce)Barrier.h / Barrier.cppThread-barrier utilityMakefileBuilds shared library and archive
-Build Instructions
-bash# Build shared library
+
+## Contents
+
+| File | Purpose |
+|------|---------|
+| `MapReduceFramework.h` | Public API |
+| `MapReduceFramework.cpp` | Framework implementation |
+| `MapReduceClient.h` | Client interface (map/reduce) |
+| `Barrier.h` / `Barrier.cpp` | Thread-barrier utility |
+| `Makefile` | Builds shared library and archive |
+
+## Build Instructions
+
+```bash
+# Build shared library
 make
 
 # Clean artifacts
@@ -11,14 +23,18 @@ make clean
 
 # Create submission archive
 make tar
+```
+
 Requires g++ 11+ with pthread support.
-Usage
 
-Implement the client interface
-Link with -lMapReduceFramework -lpthread
-Call runMapReduceFramework
+## Usage
 
-cpp#include "MapReduceClient.h"
+1. **Implement the client interface**
+2. **Link** with `-lMapReduceFramework -lpthread`
+3. **Call** `runMapReduceFramework`
+
+```cpp
+#include "MapReduceClient.h"
 #include "MapReduceFramework.h"
 
 class WordCountClient : public MapReduceClient {
@@ -32,3 +48,5 @@ int main() {
     auto results = runMapReduceFramework(&client, input, 8);
     return 0;
 }
+```
+
